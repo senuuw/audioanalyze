@@ -5,4 +5,20 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--url', help="Input video url")
 args = parser.parse_args()
 
-print(args.url)
+if not args.url:
+    print("You must add url with --url")
+    exit()
+
+
+yt_opts = {
+    'format': 'm4a/bestaudio/best',
+    'paths' : {'home' : 'audios'},
+    'postprocessors': [{  
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'm4a'
+    }]
+}
+
+with yt_dlp.YoutubeDL(yt_opts) as ydl:
+    ydl.download(args.url)
+
