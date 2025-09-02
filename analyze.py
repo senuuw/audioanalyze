@@ -1,6 +1,7 @@
 import argparse
 import yt_dlp
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--url', help="Input video url")
 args = parser.parse_args()
@@ -20,5 +21,7 @@ yt_opts = {
 }
 
 with yt_dlp.YoutubeDL(yt_opts) as ydl:
-    ydl.download(args.url)
+    info = ydl.extract_info(args.url, download=True)
 
+    audio_path = info['requested_downloads'][0]['filepath']
+    print("Saved file:", audio_path)
