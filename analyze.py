@@ -69,13 +69,14 @@ def count_terms(pickle_path):
         "Pheonix" : [],
         "Princess" : [],
         "Ram Rider" : [],
+        "Rascals" : [],
         "Royal Ghost" : ["Ghost"],
         "Royal Giant" : [],
         "Royal Hogs" : ["Hogs"],
         "Royal Recruits" : ["Recruits"], 
         "Rune Giant" : [],
         "Skeleton Army" : ["Skarmy"],
-        "Skeleton Barrel" : [],
+        "Skeleton Barrel" : ["Skelly Barrel"],
         "Skeleton Dragons" : [],
         "Skeleton King" : [],
         "Skeletons" : ["Skellies", "smeletons"],
@@ -154,15 +155,22 @@ def count_terms(pickle_path):
         "Evo" : ["Evolved"],
         "Defend" : ["Defending"],
         "Kill" : [],
-        "Value" : []
+        "Value" : [],
+        "Tower" : [],
+        "Card" : [],
+        "Bait" : [],
+
     }
 
     search_dicts = [troop_cards, spell_cards, building_cards, core_units, extra_words]
 
-    count_map = {
-
+    card_map = {
+        
     }
 
+    extra_map = {
+        
+    }
     for search_dictionary in search_dicts:
         for search_term in search_dictionary:
             
@@ -174,6 +182,14 @@ def count_terms(pickle_path):
                 count += clean_text.count(term.lower())
                 clean_text.replace(term.lower(), "")
             
-            count_map[search_term] = count
+            if search_dictionary != extra_words:
+                card_map[search_term] = count
+            else:
+                extra_map[search_term] = count
 
-    return count_map
+    return clean_text, card_map, extra_map
+
+if __name__ == "__main__":
+    pickle_path = "transcripts\ oS03eCLPEnA.pkl"
+    clean_text, card_map, extra_map = count_terms(pickle_path)
+    print("hello")

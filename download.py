@@ -2,7 +2,7 @@ import yt_dlp
 import os
 
 
-def download_audio(video_url: str, output_dir):
+def download_audio(video_url, output_dir):
 
     with yt_dlp.YoutubeDL({"quiet": True, "noplaylist": True}) as ydl:
         meta = ydl.extract_info(video_url, download=False)
