@@ -35,5 +35,5 @@ def transcribe_audio(audio_file):
     return output_path
 
 if __name__ == "__main__":
-    audio_file = r"C:\Users\Senu9\Documents\Projects\audioanalyze\audios\US_U0fsSBPM.m4a"
+    audio_file = r"audios\fvOyAAjVJEk.m4a"
     transcribe_audio(audio_file)

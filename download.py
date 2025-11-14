@@ -33,7 +33,7 @@ def download_audio(video_url, output_dir):
     return audio_path, audio_id
 
 if __name__ == '__main__':
-    youtube_url = "https://www.youtube.com/watch?v=US_U0fsSBPM"
+    youtube_url = "https://www.youtube.com/watch?v=fvOyAAjVJEk"
     output_dir = r"audios"
     audio_path, audio_id = download_audio(youtube_url, output_dir)
     print(f"Audio Path: {audio_path}, Audio_id: {audio_id}")
