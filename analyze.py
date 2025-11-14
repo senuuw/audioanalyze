@@ -1,17 +1,21 @@
 import pickle
-
+import heapq
+import re
+from collections import Counter
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 
 def count_terms(pickle_path):
 
     with open(pickle_path, 'rb') as file:
         transcript = pickle.load(file)
 
-    complete_text = ""
-    for segment in transcript:
-        complete_text += segment['text']
+    complete_text = " ".join(seg["text"] for seg in transcript)
 
-    clean_text = complete_text.replace("-", " ").lower()
-
+    clean_text = complete_text.replace("-", " ").replace(".", "")
+    clean_text = clean_text.lower()
+    
 
 
     troop_cards = {
@@ -19,7 +23,6 @@ def count_terms(pickle_path):
         "Archers" : [],
         "Baby Dragon" : ["Baby D"],
         "Balloon" : [],
-        "Bandit" : [],
         "Bats" : [],
         "Battle Healer" : ["Healer"],
         "Battle Ram" : ["Ram"],
@@ -29,13 +32,7 @@ def count_terms(pickle_path):
         "Bowler" : [],
         "Cannon Cart" : ["Cart"],
         "Dark Prince" : [],
-        "Dart Goblin" : [],
-        "Electro Dragon" : ["E Dragon", "E Drag"],
-        "Electro Giant" : ["E Giant"],
-        "Electro Spirit" : ["E Spirit"],
-        "Electro Wizard" : ["E Wizard"],
-        "Elite Barbarians" : ["E Barbs"],
-        "Elixir Golem" : ["E Golem"],
+        "Dart Goblin" : ["Dart", "Dark Goblin"],
         "Executioner" : [],
         "Fire Spirit" : [],
         "Firecracker" : [],
@@ -49,9 +46,11 @@ def count_terms(pickle_path):
         "Guards" : [],
         "Heal Spirit" : [],
         "Hunter" : [],
+        "Hog Rider" : ["Hog"],
         "Ice Golem" : [],
         "Ice Spirit" : [],
-        "Ice Wizard" : [],
+        "Ice Wizard" : ["Ice Wiz"],
+        "Inferno Dragon" : [],
         "Lava Hound" : [],
         "Little Prince" : [],
         "Lumberjack" : [],
@@ -59,7 +58,7 @@ def count_terms(pickle_path):
         "Mega Knight" : [],
         "Mega Minion" : [],
         "Might Miner" : [],
-        "Mini Pekka" : ["Mini P.E.K.K.A.", "mini schmecker"],
+        "Mini Pekka" : ["mini schmecker"],
         "Minion Horde" : [],
         "Minions" : [],
         "Monk" : [],
@@ -79,7 +78,7 @@ def count_terms(pickle_path):
         "Skeleton Barrel" : ["Skelly Barrel"],
         "Skeleton Dragons" : [],
         "Skeleton King" : [],
-        "Skeletons" : ["Skellies", "smeletons"],
+        "Skeletons" : ["Skellies", "Smeletons"],
         "Sparky" : [],
         "Spear Goblins": [],
         "Spirit Empress" : [],
@@ -87,18 +86,25 @@ def count_terms(pickle_path):
         "Three Musketeers" : [],
         "Valkyrie" : ["Valk"],
         "Wall Breaker" : [],
-        "Zappies" : []
+        "Zappies" : [],
+        "Electro Dragon" : ["E Dragon", "E Drag"],
+        "Electro Giant" : ["E Giant"],
+        "Electro Spirit" : ["E Spirit"],
+        "Electro Wizard" : ["E Wizard", "E Wiz"],
+        "Elite Barbarians" : ["E Barbs"],
+        "Elixir Golem" : ["E Golem"]
     }
 
     core_units = {
         "Barbarians" : [],
+        "Bandit" : [],
         "Giant" : [],
         "Goblins" : [],
         "Golem" : [], 
         "Knight" : [],
         "Miner" : [],
         "Witch" : [],
-        "Pekka" : ["P.E.K.K.A."],
+        "Pekka" : [],
         "Prince" : [],
         "Witch" : [],
         "Wizard" : [],
@@ -150,16 +156,22 @@ def count_terms(pickle_path):
         "Cycle" : ["Cycling"],
         "Damage" : [],
         "Chip" : [],
-        "Left" : [],
-        "Right" : [],
         "Evo" : ["Evolved"],
         "Defend" : ["Defending"],
         "Kill" : [],
         "Value" : [],
-        "Tower" : [],
         "Card" : [],
         "Bait" : [],
-
+        "Push" : [],
+        "Snipe" : [],
+        "Tower" : [],
+        "Unit" : [],
+        "Back" : [],
+        "Spam" : [],
+        "Lane" : [],
+        "Connect" : [],
+        "Strategy" : [],
+        "Spell" : []
     }
 
     search_dicts = [troop_cards, spell_cards, building_cards, core_units, extra_words]
@@ -180,7 +192,7 @@ def count_terms(pickle_path):
             count = 0 
             for term in search_list:
                 count += clean_text.count(term.lower())
-                clean_text.replace(term.lower(), "")
+                clean_text = clean_text.replace(term.lower(), "")
             
             if search_dictionary != extra_words:
                 card_map[search_term] = count
@@ -190,6 +202,6 @@ def count_terms(pickle_path):
     return clean_text, card_map, extra_map
 
 if __name__ == "__main__":
-    pickle_path = "transcripts\ oS03eCLPEnA.pkl"
+    pickle_path = "transcripts\ fvOyAAjVJEk.pkl"
     clean_text, card_map, extra_map = count_terms(pickle_path)
     print("hello")
