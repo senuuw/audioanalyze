@@ -6,7 +6,7 @@ from transcribe import transcribe_audio
 import heapq
 if __name__ == "__main__":
         
-    video_url = "https://www.youtube.com/watch?v=NF5Cu6UJiCs"
+    video_url = "https://www.youtube.com/watch?v=DPh9PgfokSg"
     audio_output_dir = 'audios'
     audio_path, audio_id = download_audio(video_url, audio_output_dir)
     print(f"Audio_path: {audio_path}, Audio_id {audio_id}")

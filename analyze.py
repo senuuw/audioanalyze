@@ -1,10 +1,6 @@
 import pickle
 import heapq
-import re
-from collections import Counter
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+import os
 
 def count_terms(pickle_path):
 
@@ -16,8 +12,6 @@ def count_terms(pickle_path):
     clean_text = complete_text.replace("-", " ").replace(".", "")
     clean_text = clean_text.lower()
     
-
-
     troop_cards = {
         "Archer Queen" : ["Queen"],
         "Archers" : [],
@@ -176,13 +170,9 @@ def count_terms(pickle_path):
 
     search_dicts = [troop_cards, spell_cards, building_cards, core_units, extra_words]
 
-    card_map = {
-        
-    }
+    card_map = {}
+    extra_map = {}
 
-    extra_map = {
-        
-    }
     for search_dictionary in search_dicts:
         for search_term in search_dictionary:
             
@@ -198,6 +188,7 @@ def count_terms(pickle_path):
                 card_map[search_term] = count
             else:
                 extra_map[search_term] = count
+
 
     return clean_text, card_map, extra_map
 
