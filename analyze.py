@@ -189,10 +189,8 @@ def count_terms(pickle_path):
             else:
                 extra_map[search_term] = count
 
-
     return clean_text, card_map, extra_map
 
 if __name__ == "__main__":
     pickle_path = "transcripts\ fvOyAAjVJEk.pkl"
     clean_text, card_map, extra_map = count_terms(pickle_path)
-    print("hello")
