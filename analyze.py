@@ -11,7 +11,7 @@ def count_terms(pickle_path):
 
     clean_text = complete_text.replace("-", " ").replace(".", "")
     clean_text = clean_text.lower()
-    
+
     troop_cards = {
         "Archer Queen" : ["Queen"],
         "Archers" : [],
@@ -34,13 +34,15 @@ def count_terms(pickle_path):
         "Flying Machine" : [],
         "Furnace" : [],
         "Giant Skeleton" : [],
+        "Goblinstein" : [],
+        "Goblin Demolisher" : [],
         "Goblin Gang" : [],
         "Goblin Giant" : [],
+        "Goblin Machine" : [],
         "Golden Knight" : [],
         "Guards" : [],
         "Heal Spirit" : [],
         "Hunter" : [],
-        "Hog Rider" : ["Hog"],
         "Ice Golem" : [],
         "Ice Spirit" : [],
         "Ice Wizard" : ["Ice Wiz"],
@@ -51,13 +53,12 @@ def count_terms(pickle_path):
         "Magic Archer" : [],
         "Mega Knight" : [],
         "Mega Minion" : [],
-        "Might Miner" : [],
+        "Mighty Miner" : [],
         "Mini Pekka" : ["mini schmecker"],
         "Minion Horde" : [],
         "Minions" : [],
         "Monk" : [],
         "Mother Witch" : [],
-        "Musketeer" : [],
         "Night Witch" : [],
         "Pheonix" : [],
         "Princess" : [],
@@ -79,7 +80,7 @@ def count_terms(pickle_path):
         "Suspicious Bush" : ["Bush"],
         "Three Musketeers" : [],
         "Valkyrie" : ["Valk"],
-        "Wall Breaker" : [],
+        "Wall Breakers" : [],
         "Zappies" : [],
         "Electro Dragon" : ["E Dragon", "E Drag"],
         "Electro Giant" : ["E Giant"],
@@ -92,13 +93,16 @@ def count_terms(pickle_path):
     core_units = {
         "Barbarians" : [],
         "Bandit" : [],
+        "Cannon" : [],
         "Giant" : [],
         "Goblins" : [],
         "Golem" : [], 
+        "Hog Rider" : ["Hog"],
         "Knight" : [],
         "Miner" : [],
-        "Witch" : [],
+        "Musketeer" : [],
         "Pekka" : [],
+        "Witch" : [],
         "Prince" : [],
         "Witch" : [],
         "Wizard" : [],
@@ -131,7 +135,6 @@ def count_terms(pickle_path):
     building_cards = {
         "Barbarian Hut" : ["Barb Hut"],
         "Bomb Tower" : [],
-        "Cannon" : [],
         "Elixir Collector": ["Pump"],
         "Goblin Cage": ["Cage"],
         "Goblin Drill" : ["Drill"],
@@ -140,7 +143,7 @@ def count_terms(pickle_path):
         "Mortar" : [],
         "Tesla" : [],
         "X Bow" : ["Expo"],
-        "Tombstone" : []
+        "Tombstone" : [],
     }
 
     extra_words = {
@@ -151,7 +154,7 @@ def count_terms(pickle_path):
         "Damage" : [],
         "Chip" : [],
         "Evo" : ["Evolved"],
-        "Defend" : ["Defending"],
+        "Defend" : [],
         "Kill" : [],
         "Value" : [],
         "Card" : [],
@@ -165,7 +168,9 @@ def count_terms(pickle_path):
         "Lane" : [],
         "Connect" : [],
         "Strategy" : [],
-        "Spell" : []
+        "Spell" : [],
+        "Ability" : [],
+        "Activate" : []
     }
 
     search_dicts = [troop_cards, spell_cards, building_cards, core_units, extra_words]
@@ -181,7 +186,7 @@ def count_terms(pickle_path):
             
             count = 0 
             for term in search_list:
-                count += clean_text.count(term.lower())
+                count += clean_text.count(" " + term.lower())
                 clean_text = clean_text.replace(term.lower(), "")
             
             if search_dictionary != extra_words:
