@@ -1,5 +1,5 @@
 import os
-
+import heapq
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
@@ -80,9 +80,17 @@ def get_youtube_api():
 
     return youtube
 
-def post_comment(video_id, comment_text):
+def post_comment(video_id, card_map, extra_map):
+    card_sorted = heapq.nlargest(5, card_map, key=card_map.get)
+    extra_sorted = heapq.nlargest(5, extra_map, key=extra_map.get)
+    
+    comment_text= (
+    "*Top 5 Cards said:*\n"
+    + "".join(f"{card}: {card_map[card]}\n" for card in card_sorted)
+    + "*Top 5 Gameplay words said:*\n"
+    + "".join(f"{word}: {extra_map[word]}\n" for word in extra_sorted)
+    )
     youtube = get_youtube_api()
-
     request = youtube.commentThreads().insert(
         part="snippet",
         body={
@@ -96,6 +104,7 @@ def post_comment(video_id, comment_text):
           }
         }
     )
+
     comment_details = request.execute()
 
 

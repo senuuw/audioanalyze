@@ -2,7 +2,7 @@ import pickle
 import heapq
 import os
 
-def count_terms(pickle_path):
+def analyze_transcript(pickle_path):
 
     with open(pickle_path, 'rb') as file:
         transcript = pickle.load(file)
@@ -194,8 +194,8 @@ def count_terms(pickle_path):
             else:
                 extra_map[search_term] = count
 
-    return clean_text, card_map, extra_map
+    return card_map, extra_map
 
 if __name__ == "__main__":
-    pickle_path = "transcripts\ fvOyAAjVJEk.pkl"
-    clean_text, card_map, extra_map = count_terms(pickle_path)
+    pickle_path = "transcripts\\fvOyAAjVJEk.pkl"
+    card_map, extra_map = analyze_transcript(pickle_path)
