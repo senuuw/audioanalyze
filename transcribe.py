@@ -28,12 +28,12 @@ def transcribe_audio(audio_file):
     audio = whisperx.load_audio(audio_file)
     result = model.transcribe(audio, batch_size=16)
 
-    output_path = "transcripts\ " + filename_id + ".pkl"
+    output_path = "transcripts\\" + filename_id + ".pkl"
     with open(output_path, 'wb') as file:
         pickle.dump(result['segments'], file)
 
     return output_path
 
 if __name__ == "__main__":
-    audio_file = r"audios\fvOyAAjVJEk.m4a"
+    audio_file = r"audios\\fvOyAAjVJEk.m4a"
     transcribe_audio(audio_file)
