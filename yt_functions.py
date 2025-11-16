@@ -85,10 +85,10 @@ def post_comment(video_id, card_map, extra_map):
     extra_sorted = heapq.nlargest(5, extra_map, key=extra_map.get)
     
     comment_text= (
-    "*Top 5 Cards said:*\n"
-    + "".join(f"{card}: {card_map[card]}\n" for card in card_sorted)
-    + "*Top 5 Gameplay words said:*\n"
-    + "".join(f"{word}: {extra_map[word]}\n" for word in extra_sorted)
+    "*Most Mentioned Cards:*\n"
+    + "".join(f"{card} ({card_map[card]})\n" for card in card_sorted)
+    + "*Most Used Gameplay Terms:*\n"
+    + "".join(f"{word} ({extra_map[word]})\n" for word in extra_sorted)
     )
     youtube = get_youtube_api()
     request = youtube.commentThreads().insert(
