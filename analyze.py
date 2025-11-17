@@ -68,7 +68,7 @@ def analyze_transcript(pickle_path):
         "Royal Giant" : [],
         "Royal Hogs" : ["Hogs"],
         "Royal Recruits" : ["Recruits"], 
-        "Rune Giant" : [],
+        "Rune Giant" : ["Ruin Giant"],
         "Skeleton Army" : ["Skarmy"],
         "Skeleton Barrel" : ["Skelly Barrel"],
         "Skeleton Dragons" : [],
@@ -197,5 +197,5 @@ def analyze_transcript(pickle_path):
     return card_map, extra_map
 
 if __name__ == "__main__":
-    pickle_path = "transcripts\\fvOyAAjVJEk.pkl"
+    pickle_path = "transcripts\\KZiwSzCKM4Y.pkl"
     card_map, extra_map = analyze_transcript(pickle_path)
